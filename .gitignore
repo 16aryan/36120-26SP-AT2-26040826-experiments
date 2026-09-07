@@ -1,0 +1,24 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Data (raw pulls can be large / regenerable - adjust if you want to commit processed data)
+data/raw/*
+!data/raw/.gitkeep
+
+# Model artefacts (comment out if you want to commit them - the brief requires final artefacts stored here)
+# models/**/*.pkl
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Env secrets
+.env
