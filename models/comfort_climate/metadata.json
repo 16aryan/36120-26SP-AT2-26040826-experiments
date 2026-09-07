@@ -1,0 +1,95 @@
+{
+  "target": "Climate Comfort Index",
+  "algorithm": "XGBoost Regressor",
+  "forecast_horizon": "Next 3 Days (+1, +2, +3 days)",
+  "prediction_type": "Regression",
+  "features": [
+    "temperature_2m_roll_max_14",
+    "cci",
+    "temperature_2m_roll_min_14",
+    "cci_roll_mean_3",
+    "precipitation_roll_max_3",
+    "cci_roll_mean_14",
+    "precipitation_roll_max_7",
+    "temperature_2m_roll_mean_14",
+    "temperature_2m_roll_min_3",
+    "wind_gusts_10m_roll_min_14",
+    "cci_roll_max_3",
+    "temperature_2m_roll_mean_7",
+    "temperature_2m_roll_max_3",
+    "precipitation_roll_max_14",
+    "cci_roll_std_14"
+  ],
+  "feature_importance": {
+    "temperature_2m_roll_max_14": 0.0557,
+    "cci": 0.0543,
+    "temperature_2m_roll_min_14": 0.033,
+    "cci_roll_mean_3": 0.0194,
+    "precipitation_roll_max_3": 0.0165,
+    "cci_roll_mean_14": 0.0161,
+    "precipitation_roll_max_7": 0.0152,
+    "temperature_2m_roll_mean_14": 0.0143,
+    "temperature_2m_roll_min_3": 0.0141,
+    "wind_gusts_10m_roll_min_14": 0.0135,
+    "cci_roll_max_3": 0.0126,
+    "temperature_2m_roll_mean_7": 0.0125,
+    "temperature_2m_roll_max_3": 0.0123,
+    "precipitation_roll_max_14": 0.012,
+    "cci_roll_std_14": 0.0119
+  },
+  "performance_metrics": {
+    "mean_rmse": 9.824,
+    "mean_mae": 7.478,
+    "mean_r2": 0.2945,
+    "h1_rmse": 8.9319,
+    "h2_rmse": 10.1634,
+    "h3_rmse": 10.3768
+  },
+  "all_model_comparison": [
+    {
+      "model": "Baseline (Dummy Mean)",
+      "mean_rmse": 11.7309,
+      "mean_mae": 9.1015,
+      "mean_r2": -0.0019,
+      "h1_rmse": 11.7229,
+      "h2_rmse": 11.7372,
+      "h3_rmse": 11.7326
+    },
+    {
+      "model": "Ridge Regression",
+      "mean_rmse": 9.764,
+      "mean_mae": 7.435,
+      "mean_r2": 0.3026,
+      "h1_rmse": 8.8054,
+      "h2_rmse": 10.1194,
+      "h3_rmse": 10.3673
+    },
+    {
+      "model": "Random Forest Regressor",
+      "mean_rmse": 9.7516,
+      "mean_mae": 7.4652,
+      "mean_r2": 0.3053,
+      "h1_rmse": 8.9473,
+      "h2_rmse": 10.0543,
+      "h3_rmse": 10.2533
+    },
+    {
+      "model": "LightGBM Regressor",
+      "mean_rmse": 9.7916,
+      "mean_mae": 7.5575,
+      "mean_r2": 0.2982,
+      "h1_rmse": 8.7711,
+      "h2_rmse": 10.2017,
+      "h3_rmse": 10.402
+    },
+    {
+      "model": "XGBoost Regressor",
+      "mean_rmse": 9.824,
+      "mean_mae": 7.478,
+      "mean_r2": 0.2945,
+      "h1_rmse": 8.9319,
+      "h2_rmse": 10.1634,
+      "h3_rmse": 10.3768
+    }
+  ]
+}

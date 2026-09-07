@@ -1,0 +1,89 @@
+{
+  "target": "Weather Hazard Category",
+  "algorithm": "Random Forest Classifier",
+  "forecast_horizon": "Exactly +7 Days",
+  "prediction_type": "Multiclass Classification",
+  "classes": {
+    "0": "Low Risk",
+    "1": "Moderate Risk",
+    "2": "High Risk",
+    "3": "Extreme Risk"
+  },
+  "features": [
+    "cloud_cover_lag_1",
+    "wind_gusts_10m_roll_std_14",
+    "temperature_2m_roll_max_14",
+    "temperature_2m_roll_std_7",
+    "wind_gusts_10m_lag_14",
+    "wind_speed_10m_lag_7",
+    "temperature_2m_roll_min_14",
+    "wind_gusts_10m_roll_std_7",
+    "cloud_cover_lag_7",
+    "temperature_2m_roll_mean_14",
+    "temperature_2m_roll_std_14",
+    "cci_roll_max_7",
+    "relative_humidity_2m_lag_7",
+    "temperature_2m_roll_std_3",
+    "cci_roll_max_14"
+  ],
+  "feature_importance": {
+    "cloud_cover_lag_1": 0.0306,
+    "wind_gusts_10m_roll_std_14": 0.0246,
+    "temperature_2m_roll_max_14": 0.0233,
+    "temperature_2m_roll_std_7": 0.0217,
+    "wind_gusts_10m_lag_14": 0.021,
+    "wind_speed_10m_lag_7": 0.0208,
+    "temperature_2m_roll_min_14": 0.0203,
+    "wind_gusts_10m_roll_std_7": 0.0188,
+    "cloud_cover_lag_7": 0.0176,
+    "temperature_2m_roll_mean_14": 0.0173,
+    "temperature_2m_roll_std_14": 0.0169,
+    "cci_roll_max_7": 0.0163,
+    "relative_humidity_2m_lag_7": 0.0157,
+    "temperature_2m_roll_std_3": 0.0153,
+    "cci_roll_max_14": 0.0148
+  },
+  "performance_metrics": {
+    "accuracy": 0.5503,
+    "balanced_accuracy": 0.2865,
+    "macro_f1": 0.2783,
+    "weighted_f1": 0.5344
+  },
+  "all_model_comparison": [
+    {
+      "model": "Baseline (Dummy Stratified)",
+      "accuracy": 0.433,
+      "balanced_accuracy": 0.2456,
+      "macro_f1": 0.2424,
+      "weighted_f1": 0.4316
+    },
+    {
+      "model": "Logistic Regression",
+      "accuracy": 0.405,
+      "balanced_accuracy": 0.273,
+      "macro_f1": 0.2511,
+      "weighted_f1": 0.4328
+    },
+    {
+      "model": "Random Forest Classifier",
+      "accuracy": 0.5503,
+      "balanced_accuracy": 0.2865,
+      "macro_f1": 0.2783,
+      "weighted_f1": 0.5344
+    },
+    {
+      "model": "LightGBM Classifier",
+      "accuracy": 0.5112,
+      "balanced_accuracy": 0.2671,
+      "macro_f1": 0.2612,
+      "weighted_f1": 0.5011
+    },
+    {
+      "model": "XGBoost Classifier",
+      "accuracy": 0.5391,
+      "balanced_accuracy": 0.2863,
+      "macro_f1": 0.2761,
+      "weighted_f1": 0.5261
+    }
+  ]
+}
