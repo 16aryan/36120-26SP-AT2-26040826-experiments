@@ -23,13 +23,14 @@ project/
 │   ├── interim/          # daily-aggregated data
 │   └── processed/        # final feature/target tables
 ├── notebooks/
-│   ├── comfort_climate/  # CCI regression notebooks
-│   └── weather_hazard/   # WHC classification notebooks
+│   ├── comfort_climate/  # 36120_26SP_AT2_26040826_comfort_climate_experiment.ipynb
+│   └── weather_hazard/   # 36120_26SP_AT2_26040826_weather_hazard_experiment.ipynb
 ├── models/
-│   ├── comfort_climate/  # saved CCI model artefacts
-│   └── weather_hazard/   # saved WHC model artefacts
+│   ├── comfort_climate/  # saved CCI model artefacts (model.joblib + metadata.json)
+│   └── weather_hazard/   # saved WHC model artefacts (model.joblib + metadata.json)
 ├── reports/              # experiment reports, figures
 ├── src/                  # shared helper code (used before packaging into TestPyPI package)
+├── tests/                # unit test suite (pytest)
 ├── pyproject.toml
 └── README.md
 ```
@@ -73,8 +74,9 @@ project/
 See `reports/` for the full derivation methodology of CCI and WHC, following
 the formulas specified in the AT2 assessment brief.
 
-## Reproducibility Notes
+## Reproducibility & Testing
 
-- All dependencies are pinned in `pyproject.toml`.
-- Notebooks are numbered in the order they should be run within each subfolder.
-- Random seeds are fixed in all modelling notebooks for reproducibility.
+- All dependencies are declared in `pyproject.toml`.
+- Run automated unit tests with `pytest tests/ -v`.
+- Each model folder contains the final trained model artifact alongside its operational `metadata.json`.
+- The official UTS template notebooks in `notebooks/comfort_climate/` and `notebooks/weather_hazard/` are pre-executed with all output cards and evaluation tables.
