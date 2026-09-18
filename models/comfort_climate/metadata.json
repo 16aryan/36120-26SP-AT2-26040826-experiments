@@ -1,95 +1,109 @@
 {
   "target": "Climate Comfort Index",
-  "algorithm": "XGBoost Regressor",
-  "forecast_horizon": "Next 3 Days (+1, +2, +3 days)",
-  "prediction_type": "Regression",
+  "prediction_type": "regression",
+  "algorithm": "Ridge",
+  "forecast_horizon": "3 Days (+1, +2, +3)",
   "features": [
-    "temperature_2m_roll_max_14",
-    "cci",
-    "temperature_2m_roll_min_14",
-    "cci_roll_mean_3",
-    "precipitation_roll_max_3",
-    "cci_roll_mean_14",
-    "precipitation_roll_max_7",
-    "temperature_2m_roll_mean_14",
-    "temperature_2m_roll_min_3",
-    "wind_gusts_10m_roll_min_14",
-    "cci_roll_max_3",
+    "temperature_2m",
+    "relative_humidity_2m",
+    "wind_speed_10m",
+    "cloud_cover",
+    "precipitation",
+    "wind_gusts_10m",
+    "apparent_temp",
+    "sin_dayofyear",
+    "cos_dayofyear",
+    "sin_month",
+    "cos_month",
+    "temperature_2m_lag_1",
+    "temperature_2m_lag_2",
+    "temperature_2m_lag_3",
+    "temperature_2m_lag_7",
+    "precipitation_lag_1",
+    "precipitation_lag_2",
+    "precipitation_lag_3",
+    "wind_speed_10m_lag_1",
+    "cloud_cover_lag_1",
+    "cci_lag_1",
+    "cci_lag_2",
+    "cci_lag_3",
     "temperature_2m_roll_mean_7",
-    "temperature_2m_roll_max_3",
-    "precipitation_roll_max_14",
-    "cci_roll_std_14"
+    "temperature_2m_roll_mean_14",
+    "temperature_2m_roll_max_14",
+    "temperature_2m_roll_min_14",
+    "precipitation_roll_max_7",
+    "cci_roll_mean_3",
+    "cci_roll_mean_14",
+    "dry_streak"
   ],
   "feature_importance": {
-    "temperature_2m_roll_max_14": 0.0557,
-    "cci": 0.0543,
-    "temperature_2m_roll_min_14": 0.033,
-    "cci_roll_mean_3": 0.0194,
-    "precipitation_roll_max_3": 0.0165,
-    "cci_roll_mean_14": 0.0161,
-    "precipitation_roll_max_7": 0.0152,
-    "temperature_2m_roll_mean_14": 0.0143,
-    "temperature_2m_roll_min_3": 0.0141,
-    "wind_gusts_10m_roll_min_14": 0.0135,
-    "cci_roll_max_3": 0.0126,
-    "temperature_2m_roll_mean_7": 0.0125,
-    "temperature_2m_roll_max_3": 0.0123,
-    "precipitation_roll_max_14": 0.012,
-    "cci_roll_std_14": 0.0119
+    "cci_roll_mean_3": 4.7168,
+    "cci_lag_1": 2.2071,
+    "cos_dayofyear": 1.9142,
+    "cci_lag_2": 1.9017,
+    "cci_roll_mean_14": 1.3356,
+    "apparent_temp": 1.1428,
+    "temperature_2m_roll_min_14": 1.0944,
+    "temperature_2m_roll_max_14": 1.0193,
+    "cos_month": 0.9179,
+    "relative_humidity_2m": 0.9038,
+    "sin_dayofyear": 0.886,
+    "temperature_2m_roll_mean_7": 0.7965,
+    "cloud_cover": 0.7322,
+    "temperature_2m": 0.658,
+    "sin_month": 0.5069,
+    "wind_speed_10m": 0.393,
+    "precipitation_roll_max_7": 0.3881,
+    "wind_gusts_10m": 0.3718,
+    "wind_speed_10m_lag_1": 0.3549,
+    "temperature_2m_lag_1": 0.3256,
+    "temperature_2m_lag_7": 0.2783,
+    "cci_lag_3": 0.2713,
+    "temperature_2m_lag_3": 0.221,
+    "temperature_2m_roll_mean_14": 0.2201,
+    "cloud_cover_lag_1": 0.2153,
+    "precipitation": 0.1845,
+    "temperature_2m_lag_2": 0.1709,
+    "precipitation_lag_1": 0.1182,
+    "dry_streak": 0.0992,
+    "precipitation_lag_3": 0.0642,
+    "precipitation_lag_2": 0.0357
+  },
+  "hyperparameters": {
+    "alpha": 10.0
   },
   "performance_metrics": {
-    "mean_rmse": 9.824,
-    "mean_mae": 7.478,
-    "mean_r2": 0.2945,
-    "h1_rmse": 8.9319,
-    "h2_rmse": 10.1634,
-    "h3_rmse": 10.3768
-  },
-  "all_model_comparison": [
-    {
-      "model": "Baseline (Dummy Mean)",
-      "mean_rmse": 11.7309,
-      "mean_mae": 9.1015,
-      "mean_r2": -0.0019,
-      "h1_rmse": 11.7229,
-      "h2_rmse": 11.7372,
-      "h3_rmse": 11.7326
+    "h1 (+1d)": {
+      "RMSE": 8.796,
+      "MAE": 6.7222,
+      "R2": 0.436
     },
-    {
-      "model": "Ridge Regression",
-      "mean_rmse": 9.764,
-      "mean_mae": 7.435,
-      "mean_r2": 0.3026,
-      "h1_rmse": 8.8054,
-      "h2_rmse": 10.1194,
-      "h3_rmse": 10.3673
+    "h2 (+2d)": {
+      "RMSE": 10.0694,
+      "MAE": 7.6384,
+      "R2": 0.2625
     },
-    {
-      "model": "Random Forest Regressor",
-      "mean_rmse": 9.7516,
-      "mean_mae": 7.4652,
-      "mean_r2": 0.3053,
-      "h1_rmse": 8.9473,
-      "h2_rmse": 10.0543,
-      "h3_rmse": 10.2533
-    },
-    {
-      "model": "LightGBM Regressor",
-      "mean_rmse": 9.7916,
-      "mean_mae": 7.5575,
-      "mean_r2": 0.2982,
-      "h1_rmse": 8.7711,
-      "h2_rmse": 10.2017,
-      "h3_rmse": 10.402
-    },
-    {
-      "model": "XGBoost Regressor",
-      "mean_rmse": 9.824,
-      "mean_mae": 7.478,
-      "mean_r2": 0.2945,
-      "h1_rmse": 8.9319,
-      "h2_rmse": 10.1634,
-      "h3_rmse": 10.3768
+    "h3 (+3d)": {
+      "RMSE": 10.2902,
+      "MAE": 7.8633,
+      "R2": 0.2293
     }
-  ]
+  },
+  "comparison_models": {
+    "XGBoost (tuned)": {
+      "mean_RMSE": 9.7827
+    },
+    "LightGBM": {
+      "mean_RMSE": 10.247433333333333
+    },
+    "Ridge": {
+      "mean_RMSE": 9.718533333333333
+    }
+  },
+  "train_date_range": [
+    "2018-01-14",
+    "2023-12-31"
+  ],
+  "hypothesis_outcome": "Hypothesis Confirmed",
+  "hypothesis_improvement_vs_persistence_rmse": 3.513233333333332
 }

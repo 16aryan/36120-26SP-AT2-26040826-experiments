@@ -22,3 +22,6 @@ data/raw/*
 
 # Env secrets
 .env
+
+# Testing cache
+.pytest_cache/
