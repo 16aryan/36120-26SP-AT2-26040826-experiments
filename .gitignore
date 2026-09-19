@@ -25,3 +25,7 @@ data/raw/*
 
 # Testing cache
 .pytest_cache/
+
+# Local AT1 package workspace copy
+36120-26SP-AT2-26040826-Python-packageAryan-Goel/
+
