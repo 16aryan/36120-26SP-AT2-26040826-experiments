@@ -74,6 +74,21 @@ project/
 See `reports/` for the full derivation methodology of CCI and WHC, following
 the formulas specified in the AT2 assessment brief.
 
+## Custom Python Package (`nba-prep-26040826` v0.4.0)
+
+As required by the AT2 specification, the custom Python package originally developed for AT1 has been extended to v0.4.0 and published to **TestPyPI**. It provides shared, reusable feature engineering, aggregation logic, and target derivations across both collegiate basketball (AT1) and meteorological intelligence (AT2).
+
+- **TestPyPI URL:** [https://test.pypi.org/project/nba-prep-26040826/0.4.0/](https://test.pypi.org/project/nba-prep-26040826/0.4.0/)
+- **Package GitHub:** [16aryan/36120-26SP-group38-26040826-Python-package-Aryan-Goel](https://github.com/16aryan/36120-26SP-group38-26040826-Python-package-Aryan-Goel)
+- **Install Command:**
+  ```bash
+  pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ nba-prep-26040826==0.4.0
+  ```
+
+### Dual-Domain Scope:
+1. **AT1 (Collegiate Basketball Analytics):** Anthropometric cleaning (`clean_height`), collegiate year normalization, True Shooting %, defensive impact, multi-season cumulative player statistics, draft prospect tiers, and financial contract ROI modeling.
+2. **AT2 (Weather Intelligence):** Open-Meteo hourly-to-daily aggregations (`aggregate_hourly_to_daily`), Climate Comfort Index calculations (`calculate_cci`, `interpret_cci`), Weather Hazard Category classification (`calculate_whc`, `interpret_whc`), consecutive dry-streak days (`calculate_dry_streak`), and cyclical calendar encodings (`add_cyclical_calendar_features`).
+
 ## Reproducibility & Verification Status
 
 All components, data splits, model artifacts, and test suites have been verified for reproducibility and production readiness.
