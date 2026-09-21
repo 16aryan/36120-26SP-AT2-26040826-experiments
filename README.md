@@ -94,7 +94,7 @@ As required by the AT2 specification, the custom Python package originally devel
 All components, data splits, model artifacts, and test suites have been verified for reproducibility and production readiness.
 
 ### 1. Automated Unit Test Suite (`pytest`)
-- **Execution Result:** **19 / 19 passed** in 1.31s (`pytest -v`)
+- **Execution Result:** **28 / 28 passed** in 1.40s (`pytest -v`)
 - [`tests/test_leakage.py`](tests/test_leakage.py): Verified strict temporal boundary isolation and zero-leakage backward shifting across all feature engineering pipelines.
 - [`tests/test_preprocessing.py`](tests/test_preprocessing.py): Verified hourly-to-daily data aggregation algorithms and missing value imputation rules.
 - [`tests/test_targets.py`](tests/test_targets.py): Verified mathematical formulation, boundary conditions ($0 \le \text{CCI} \le 100$), individual component scores, and 4-tier WHC classifications.

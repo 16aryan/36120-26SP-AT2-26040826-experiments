@@ -32,6 +32,15 @@ from src.targets import (
     calculate_cloud_score,
     calculate_rain_score,
     calculate_climate_comfort_index,
+    interpret_cci,
+    calculate_rain_hazard,
+    calculate_wind_hazard,
+    calculate_cloud_hazard,
+    calculate_snow_hazard,
+    calculate_temp_hazard,
+    calculate_weather_hazard_index,
+    convert_whi_to_whc,
+    add_derived_targets,
 )
 
 
@@ -161,3 +170,103 @@ def test_target_shift_no_leakage():
         assert target_h1.iloc[t] == cci_series.iloc[t + 1]
     # last row's target should be NaN (no future data available)
     assert np.isnan(target_h1.iloc[-1])
+
+
+# ---------------------------------------------------------------------------
+# Target 2: Weather Hazard Category (WHC) formulas (per AT2 brief, verbatim)
+# ---------------------------------------------------------------------------
+
+def test_rain_hazard_formula_and_bounds():
+    # RainHazard = MIN(precipitation / 30, 1)
+    assert calculate_rain_hazard(pd.Series([0.0])).iloc[0] == pytest.approx(0.0)
+    assert calculate_rain_hazard(pd.Series([15.0])).iloc[0] == pytest.approx(0.5)
+    assert calculate_rain_hazard(pd.Series([30.0])).iloc[0] == pytest.approx(1.0)
+    assert calculate_rain_hazard(pd.Series([60.0])).iloc[0] == pytest.approx(1.0)
+
+
+def test_wind_hazard_formula_and_bounds():
+    # WindHazard = MIN(wind_gusts_10m / 100, 1)
+    assert calculate_wind_hazard(pd.Series([0.0])).iloc[0] == pytest.approx(0.0)
+    assert calculate_wind_hazard(pd.Series([50.0])).iloc[0] == pytest.approx(0.5)
+    assert calculate_wind_hazard(pd.Series([100.0])).iloc[0] == pytest.approx(1.0)
+    assert calculate_wind_hazard(pd.Series([150.0])).iloc[0] == pytest.approx(1.0)
+
+
+def test_cloud_hazard_formula_and_bounds():
+    # CloudHazard = MIN(cloud_cover / 100, 1)
+    assert calculate_cloud_hazard(pd.Series([0.0])).iloc[0] == pytest.approx(0.0)
+    assert calculate_cloud_hazard(pd.Series([50.0])).iloc[0] == pytest.approx(0.5)
+    assert calculate_cloud_hazard(pd.Series([100.0])).iloc[0] == pytest.approx(1.0)
+
+
+def test_snow_hazard_formula_and_bounds():
+    # SnowHazard = MIN(snowfall / 15, 1)
+    assert calculate_snow_hazard(pd.Series([0.0])).iloc[0] == pytest.approx(0.0)
+    assert calculate_snow_hazard(pd.Series([7.5])).iloc[0] == pytest.approx(0.5)
+    assert calculate_snow_hazard(pd.Series([15.0])).iloc[0] == pytest.approx(1.0)
+    assert calculate_snow_hazard(pd.Series([30.0])).iloc[0] == pytest.approx(1.0)
+
+
+def test_temp_hazard_formula_and_bounds():
+    # TempHazard = MIN(ABS(temperature_2m - 22) / 25, 1)
+    assert calculate_temp_hazard(pd.Series([22.0])).iloc[0] == pytest.approx(0.0)
+    assert calculate_temp_hazard(pd.Series([34.5])).iloc[0] == pytest.approx(0.5)
+    assert calculate_temp_hazard(pd.Series([9.5])).iloc[0] == pytest.approx(0.5)
+    assert calculate_temp_hazard(pd.Series([47.0])).iloc[0] == pytest.approx(1.0)
+    assert calculate_temp_hazard(pd.Series([-3.0])).iloc[0] == pytest.approx(1.0)
+
+
+def test_whi_composite_perfect_conditions():
+    # When all hazard components are 0, WHI must be exactly 0
+    whi, _ = calculate_weather_hazard_index(
+        precipitation=pd.Series([0.0]),
+        wind_gusts_10m=pd.Series([0.0]),
+        cloud_cover=pd.Series([0.0]),
+        snowfall=pd.Series([0.0]),
+        temperature_2m=pd.Series([22.0]),
+    )
+    assert whi.iloc[0] == pytest.approx(0.0)
+
+
+def test_whi_composite_extreme_conditions():
+    # When all hazard components are maxed (>=1.0), WHI must be 100
+    whi, _ = calculate_weather_hazard_index(
+        precipitation=pd.Series([100.0]),
+        wind_gusts_10m=pd.Series([200.0]),
+        cloud_cover=pd.Series([100.0]),
+        snowfall=pd.Series([50.0]),
+        temperature_2m=pd.Series([60.0]),
+    )
+    assert whi.iloc[0] == pytest.approx(100.0)
+
+
+def test_convert_whi_to_whc_thresholds():
+    # Class 0: WHI < 25
+    # Class 1: 25 <= WHI < 50
+    # Class 2: 50 <= WHI < 75
+    # Class 3: WHI >= 75
+    whi_values = pd.Series([0.0, 24.9, 25.0, 49.9, 50.0, 74.9, 75.0, 100.0])
+    whc_labels = convert_whi_to_whc(whi_values)
+    expected = [0, 0, 1, 1, 2, 2, 3, 3]
+    assert list(whc_labels) == expected
+
+
+def test_add_derived_targets_integration():
+    daily_df = pd.DataFrame({
+        "temperature_2m": [22.0, 35.0],
+        "relative_humidity_2m": [50.0, 80.0],
+        "wind_speed_10m": [10.0, 30.0],
+        "wind_gusts_10m": [15.0, 80.0],
+        "cloud_cover": [0.0, 90.0],
+        "precipitation": [0.0, 15.0],
+        "snowfall": [0.0, 0.0],
+    })
+    result = add_derived_targets(daily_df)
+    assert "cci" in result.columns
+    assert "whi" in result.columns
+    assert "whc" in result.columns
+    assert "whc_name" in result.columns
+    assert result.loc[0, "whc"] == 0
+    assert result.loc[0, "whc_name"] == "Low Risk"
+    assert result.loc[0, "cci"] == pytest.approx(100.0)
+
