@@ -1,103 +1,89 @@
 {
   "target": "Weather Hazard Category",
-  "prediction_type": "multiclass_classification",
-  "algorithm": "Random Forest",
-  "forecast_horizon": "7 Days (+7)",
-  "features": [
-    "wind_gusts_10m",
-    "precipitation",
-    "cloud_cover",
-    "temperature_2m",
-    "whi",
-    "sin_dayofyear",
-    "cos_dayofyear",
-    "sin_month",
-    "cos_month",
-    "wind_gusts_10m_lag_1",
-    "wind_gusts_10m_lag_2",
-    "wind_gusts_10m_lag_7",
-    "wind_gusts_10m_lag_14",
-    "precipitation_lag_1",
-    "precipitation_lag_2",
-    "precipitation_lag_7",
-    "cloud_cover_lag_1",
-    "cloud_cover_lag_7",
-    "temperature_2m_lag_1",
-    "temperature_2m_lag_7",
-    "wind_gusts_10m_roll_std_7",
-    "wind_gusts_10m_roll_std_14",
-    "wind_gusts_10m_roll_max_7",
-    "precipitation_roll_max_7",
-    "precipitation_roll_max_14",
-    "temperature_2m_roll_mean_14",
-    "temperature_2m_roll_max_14",
-    "temperature_2m_roll_min_14"
-  ],
-  "feature_importance": {
-    "cloud_cover_lag_1": 0.0689,
-    "temperature_2m_roll_max_14": 0.0655,
-    "wind_gusts_10m_roll_std_14": 0.0595,
-    "temperature_2m_roll_min_14": 0.058,
-    "wind_gusts_10m_lag_14": 0.0554,
-    "wind_gusts_10m_lag_7": 0.0486,
-    "precipitation_lag_7": 0.0481,
-    "temperature_2m": 0.0475,
-    "wind_gusts_10m_roll_std_7": 0.0426,
-    "cloud_cover_lag_7": 0.041,
-    "cos_dayofyear": 0.0408,
-    "temperature_2m_roll_mean_14": 0.0404,
-    "temperature_2m_lag_1": 0.0392,
-    "wind_gusts_10m_roll_max_7": 0.0367,
-    "sin_dayofyear": 0.0313,
-    "wind_gusts_10m_lag_1": 0.0309,
-    "precipitation_roll_max_14": 0.0301,
-    "whi": 0.0284,
-    "temperature_2m_lag_7": 0.0265,
-    "cloud_cover": 0.0263,
-    "wind_gusts_10m_lag_2": 0.0253,
-    "precipitation_roll_max_7": 0.0251,
-    "wind_gusts_10m": 0.0243,
-    "precipitation": 0.0173,
-    "cos_month": 0.0112,
-    "precipitation_lag_2": 0.0106,
-    "sin_month": 0.0102,
-    "precipitation_lag_1": 0.0101
-  },
-  "class_labels": {
+  "algorithm": "Random Forest Classifier",
+  "forecast_horizon": "Exactly +7 Days",
+  "prediction_type": "multiclass classification",
+  "classes": {
     "0": "Low Risk",
     "1": "Moderate Risk",
     "2": "High Risk",
     "3": "Extreme Risk"
   },
-  "performance_metrics": {
-    "Accuracy": 0.5447,
-    "Balanced Accuracy": 0.288,
-    "Macro F1": 0.2792,
-    "Weighted F1": 0.5336
-  },
-  "comparison_models": {
-    "Random Forest": {
-      "Accuracy": 0.5447,
-      "Balanced Accuracy": 0.288,
-      "Macro F1": 0.2792,
-      "Weighted F1": 0.5336
-    },
-    "Logistic Regression": {
-      "Accuracy": 0.3743,
-      "Balanced Accuracy": 0.4856,
-      "Macro F1": 0.2509,
-      "Weighted F1": 0.4188
-    },
-    "XGBoost": {
-      "Accuracy": 0.4944,
-      "Balanced Accuracy": 0.2608,
-      "Macro F1": 0.2535,
-      "Weighted F1": 0.4839
-    }
-  },
-  "train_date_range": [
-    "0",
-    "2190"
+  "features": [
+    "cloud_cover_lag_1",
+    "wind_gusts_10m_roll_std_14",
+    "temperature_2m_roll_max_14",
+    "temperature_2m_roll_std_7",
+    "wind_gusts_10m_lag_14",
+    "wind_speed_10m_lag_7",
+    "temperature_2m_roll_min_14",
+    "wind_gusts_10m_roll_std_7",
+    "cloud_cover_lag_7",
+    "temperature_2m_roll_mean_14",
+    "temperature_2m_roll_std_14",
+    "cci_roll_max_7",
+    "relative_humidity_2m_lag_7",
+    "temperature_2m_roll_std_3",
+    "cci_roll_max_14"
   ],
-  "hypothesis_outcome": "Hypothesis Confirmed"
+  "feature_importance": {
+    "cloud_cover_lag_1": 0.0306,
+    "wind_gusts_10m_roll_std_14": 0.0246,
+    "temperature_2m_roll_max_14": 0.0233,
+    "temperature_2m_roll_std_7": 0.0217,
+    "wind_gusts_10m_lag_14": 0.021,
+    "wind_speed_10m_lag_7": 0.0208,
+    "temperature_2m_roll_min_14": 0.0203,
+    "wind_gusts_10m_roll_std_7": 0.0188,
+    "cloud_cover_lag_7": 0.0176,
+    "temperature_2m_roll_mean_14": 0.0173,
+    "temperature_2m_roll_std_14": 0.0169,
+    "cci_roll_max_7": 0.0163,
+    "relative_humidity_2m_lag_7": 0.0157,
+    "temperature_2m_roll_std_3": 0.0153,
+    "cci_roll_max_14": 0.0148
+  },
+  "performance_metrics": {
+    "accuracy": 0.5503,
+    "balanced_accuracy": 0.2865,
+    "macro_f1": 0.2783,
+    "weighted_f1": 0.5344
+  },
+  "all_model_comparison": [
+    {
+      "model": "Baseline (Dummy Stratified)",
+      "accuracy": 0.433,
+      "balanced_accuracy": 0.2456,
+      "macro_f1": 0.2424,
+      "weighted_f1": 0.4316
+    },
+    {
+      "model": "Logistic Regression",
+      "accuracy": 0.405,
+      "balanced_accuracy": 0.273,
+      "macro_f1": 0.2511,
+      "weighted_f1": 0.4328
+    },
+    {
+      "model": "Random Forest Classifier",
+      "accuracy": 0.5503,
+      "balanced_accuracy": 0.2865,
+      "macro_f1": 0.2783,
+      "weighted_f1": 0.5344
+    },
+    {
+      "model": "LightGBM Classifier",
+      "accuracy": 0.5112,
+      "balanced_accuracy": 0.2671,
+      "macro_f1": 0.2612,
+      "weighted_f1": 0.5011
+    },
+    {
+      "model": "XGBoost Classifier",
+      "accuracy": 0.5391,
+      "balanced_accuracy": 0.2863,
+      "macro_f1": 0.2761,
+      "weighted_f1": 0.5261
+    }
+  ]
 }
