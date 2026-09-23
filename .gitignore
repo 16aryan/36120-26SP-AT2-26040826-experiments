@@ -8,9 +8,8 @@ __pycache__/
 venv/
 env/
 
-# Data (raw pulls can be large / regenerable - adjust if you want to commit processed data)
-data/raw/*
-!data/raw/.gitkeep
+# Data (tracked for full offline reproducibility)
+# data/raw/*
 
 # Model artefacts (comment out if you want to commit them - the brief requires final artefacts stored here)
 # models/**/*.pkl
