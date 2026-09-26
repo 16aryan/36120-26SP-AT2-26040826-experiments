@@ -4,14 +4,14 @@
 **Student ID:** 26040826  
 **Subject:** 36120 — Advanced Machine Learning Applications  
 **Institution:** University of Technology Sydney (UTS)  
-**Live Production Microservice:** [https://weather-intel-api-26040826.onrender.com](https://weather-intel-api-26040826.onrender.com)  
+**Live Production Microservice:** [https://three6120-26sp-at2-26040826-api.onrender.com](https://three6120-26sp-at2-26040826-api.onrender.com)  
 **FastAPI Deployment Repository:** [https://github.com/16aryan/36120-26SP-AT2-26040826-api](https://github.com/16aryan/36120-26SP-AT2-26040826-api)  
 **Custom TestPyPI Package:** [`nba-prep-26040826` v0.4.0](https://test.pypi.org/project/nba-prep-26040826/0.4.0/)  
 
 [![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![Tests: Pytest](https://img.shields.io/badge/tests-28%20passed-brightgreen.svg)](tests/)
-[![Render](https://img.shields.io/badge/Render-Live-46E3B7.svg?logo=render&logoColor=white)](https://weather-intel-api-26040826.onrender.com)
+[![Render](https://img.shields.io/badge/Render-Live-46E3B7.svg?logo=render&logoColor=white)](https://three6120-26sp-at2-26040826-api.onrender.com)
 [![TestPyPI Package](https://img.shields.io/badge/TestPyPI-nba--prep--26040826%20v0.4.0-blue.svg)](https://test.pypi.org/project/nba-prep-26040826/0.4.0/)
 
 ---
@@ -196,4 +196,4 @@ jupyter lab
 * **Deliverable 1 (Experiments Archive):** `36120-26SP-AT2-26040826-experiments.zip` (31 MB)
 * **Deliverable 2 (API Archive):** `36120-26SP-AT2-26040826-api.zip` (7.5 MB)
 * **Deliverable 3 (Academic Report):** `36120-26SP-AT2-26040826-report.docx` (1.2 MB, 3,705 words)
-* **Deliverable 4 (Live Cloud API):** [https://weather-intel-api-26040826.onrender.com](https://weather-intel-api-26040826.onrender.com)
+* **Deliverable 4 (Live Cloud API):** [https://three6120-26sp-at2-26040826-api.onrender.com](https://three6120-26sp-at2-26040826-api.onrender.com)
